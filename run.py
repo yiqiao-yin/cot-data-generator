@@ -29,9 +29,11 @@ def augment_answer(example: dict, api_key: str) -> dict:
 
 def main():
     api_key = input("Enter your Together API Key: ")
-    data = load_dataset('openai/gsm8k', 'main')['train'].select(range(2000))
+    orig_data = input("Enter Huggingface Data ID: ")
+    data = load_dataset(orig_data)
     data = data.map(lambda x: augment_answer(x, api_key), num_proc=8)
-    data.save_to_disk("augmented_gsm8k_2k")
+    new_data_name = input("Enter name for new dataset (used for local dir): ")
+    data.save_to_disk(new_data_name)
 
     # Ask user if they want to upload to Hugging Face
     upload_choice = input("Do you want to upload the dataset to Hugging Face? (yes/no): ")
