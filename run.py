@@ -41,7 +41,7 @@ def main():
         hf_token = input("Enter your Hugging Face API token: ")
         hf_username = input("Enter your Hugging Face username: ")
         repo_name = input("Enter the desired repository name on Hugging Face: ")
-        upload_to_hugging_face("augmented_gsm8k_2k", hf_username, repo_name, hf_token)
+        upload_to_hugging_face(new_data_name, hf_username, repo_name, hf_token)
     else:
         print("Upload aborted.")
 
