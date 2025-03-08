@@ -43,6 +43,8 @@ You will be prompted to enter:
 
 ```plaintext
 Enter your Together API Key: [Your API Key Here]
+Enter Huggingface Data ID: openai/gsm8k
+Enter name for new dataset (used for local dir): openai-gsm8k-augmented
 Do you want to upload the dataset to Hugging Face? (yes/no): yes
 Enter your Hugging Face API token: [Your Hugging Face Token Here]
 Enter your Hugging Face username: [Your Username Here]
