@@ -9,8 +9,10 @@ from tqdm import tqdm
 def augment_answer(example: dict, api_key: str) -> dict:
     bot = ChatBot(api_key=api_key)
     bot.history = [{"role": "assistant", "content": "You always provide reasoning. Your answer starts from <think>xxx</think> and <response>."}]
-    current_question = example["question"]
-    current_answer = example["answer"]
+    question_feature = input("What is the name of feature to be used as 'question'?")
+    answer_feature = input("What is the name of feature to be used as 'answer'?")
+    current_question = example[question_feature]
+    current_answer = example[answer_feature]
     augmented_content = f"Provide reasoning how to answer question: {current_question} and to arrive with answer: {current_answer}"
     bot.append_history(role="user", content=augmented_content)
     attempts = 0
