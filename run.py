@@ -52,21 +52,21 @@ def main():
     chain_of_thought = input("What is the chain of thought in this dataset? (leave blank if none): ")  # Allow None type if user decides to not enter anything
     answer_feature = input("What is the name of the feature to be used as 'answer'? ")
     new_data_name = input("Enter name for new dataset (used for local dir): ")
-
-    # Ask user if they want to upload to Hugging Face
     upload_choice = input("Do you want to upload the dataset to Hugging Face? (yes/no): ")
-    if upload_choice.lower() == "yes":
-        hf_token = input("Enter your Hugging Face API token: ")
-        hf_username = input("Enter your Hugging Face username: ")
-        repo_name = input("Enter the desired repository name on Hugging Face: ")
-        upload_to_hugging_face(new_data_name, hf_username, repo_name, hf_token)
-    else:
-        print("Upload aborted.")
+    hf_token = input("Enter your Hugging Face API token: ")
+    hf_username = input("Enter your Hugging Face username: ")
+    repo_name = input("Enter the desired repository name on Hugging Face: ")
 
     # Load dataset and augment data
     data = load_dataset(orig_data)
     data = data.map(lambda x: augment_answer(x, api_key, question_feature, chain_of_thought, answer_feature), num_proc=8)
     data.save_to_disk(new_data_name)
+
+    # Upload to Hugging Face if user chooses to
+    if upload_choice.lower() == "yes":
+        upload_to_hugging_face(new_data_name, hf_username, repo_name, hf_token)
+    else:
+        print("Upload aborted.")
 
 if __name__ == "__main__":
     main()
